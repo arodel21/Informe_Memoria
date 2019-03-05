@@ -1,0 +1,500 @@
+\secnumbersection{MARCO CONCEPTUAL}
+
+%Se debe describir la base conceptual o fundamentos en los que se basa tu memoria, es decir, todos los conceptos técnicos, metodologías, herramientas, etc. que están involucradas en la solución propuesta. En el fondo esta parte permite precisar y delimitar el problema, estableciendo definiciones para unificar conceptos y lenguaje y fijar relaciones con otros trabajos o soluciones encontradas por otros al mismo problema evitando así plagios o repetir errores ya conocidos o abordados por otros.
+
+%En esta parte es importante relacionar estos conceptos con la memoria y es fundamental utilizar referencias bibliográficas (o de la web) recientes, por ejemplo \cite{gettelfinger2004will}.
+
+\subsection{Estado del Arte}
+
+Las técnicas de \acrshort{ml} han sido utilizadas para solucionar todo tipo de problemas, un ejemplo que ha producido impacto es la aplicación en sistemas de recomendación, como el utilizado por la plataforma Netflix \cite{Koren2009}, para sugerir películas a los usuarios en base a la predicción de la calificación o \emph{rating} de las películas. Otra aplicación interesante es el estudio de obras de arte famosas, como \cite{Saleh2014}, en el que una red neuronal no supervisada determina la influencia entre los autores de diferentes pinturas.
+%
+
+En el campo de física de partículas, el uso de \acrshort{ml} se ha vuelto fundamental para el análisis de datos, debido a la necesidad de almacenar y analizar la cantidad creciente de datos acumulados \cite{Albertsson2018}. 
+%
+Existe una gran variedad de estudios en el área, que sentaron las bases en el uso de técnicas de \acrshort{ml}, un ejemplo es la búsqueda del bosón de Higgs con redes neuronales artificiales (\emph{artificial neural networks}, \acrshort{ann}) \cite{Chiappetta1994}, cuya labor consistió en clasificar los datos separándolos en dos grupos: \emph{background} y producción del bosón de Higgs. Otro ejemplo es el uso de \emph{boosted decision trees} (\acrshort{bdt}) y \acrshort{ann} para la identificación de partículas \cite{Roe2005}, resultando \acrshort{bdt} como el método más óptimo entre estos dos. También se tienen aplicaciones para la reconstrucción de trayectorias \cite{Peterson1989} y masas \cite{Lnnblad1992} de partículas utilizando \acrshort{ann}s entrenadas con datos de las señales captadas después de una colisión.
+%
+Particularmente, en el \acrshort{lhc}, el uso de \acrshort{ml} no está restringido sólo al estudio de las partículas, sino que es utilizado en el manejo de datos general, como en predicción del acceso a datos \cite{Kuznetsov2016} con el objetivo de optimizar el espacio de almacenamiento, además del monitoreo de la latencia en la transferencia de los datos \cite{Bonacorsi2015}, utilizando \acrshort{ml} para predecir congestiones e identificar fuentes problemáticas.
+%
+Con respecto al descubrimiento del bosón de Higgs, tanto \acrshort{atlas} \cite{Aad2012} \cite{Aad2012b} como \acrshort{cms} \cite{Chatrchyan2012} realizaron sus contribuciones utilizando algoritmos de \acrshort{ml} aplicados a conjuntos de datos reunidos en colisiones de partículas de máximo 7 TeV de energía.
+%
+
+Algunos ejemplos en los cuales las técnicas de \acrshort{ml} han sido aplicadas con éxito al análisis de los datos recogidos por el experimento \acrshort{atlas} son: la identificación de \emph{jets} hadrónicos producidos por quarks $b$ o leptones $\tau$ \cite{2016} \cite{ATLAS:2017mpa}, los cuales son fundamentales en el estudio de las propiedades físicas del bosón de Higgs. Dichas técnicas también han sido aplicadas en una variedad de búsquedas de nueva física, ya que permiten una mejor separación entre señal y background en procesos complicados, como es el caso de la producción del par de bosones de Higgs \cite{Aaboud2018}.
+%
+
+Durante el 2014 se realizó la competencia de \acrshort{ml} del bosón de Higgs \cite{Adam2015}, organizado por científicos de datos y físicos del experimento \acrshort{atlas}. Los participantes se enfrentaron para desarrollar un algoritmo en pos de mejorar la detección de eventos de señal del bosón de Higgs que decae en dos partículas $\tau$, utilizando una muestra de datos simulada de \acrshort{atlas} \cite{MLWP}. El ganador fue Gábor Melis \cite{Melis2015}, quien desarrolló un algoritmo de un conjunto de redes neuronales profundas (\emph{deep neural networks}, \acrshort{dnn}s) entrenadas con subconjuntos de datos aleatorios. El segundo ganador, Tim Salimans, desarrolló una solución descrita como la combinación de un gran número de \acrshort{bdt}s. La superioridad del método ganador que utiliza \acrshort{dnn} se justifica con su alta precisión y rapidez, sin embargo requiere de bastante capacidad computacional. Por otro lado, la solución de \acrshort{bdt}s presenta una solución más simple y requiere de menos recursos computacionales.
+%
+
+\emph{Deep learning} (\acrshort{dl} o {\em aprendizaje profundo}) es el enfoque actual de \acrshort{ml}, que está revolucionando el análisis de datos en diversas áreas de la ciencia, mejorando el estado del arte en reconocimiento de imágenes, investigación genómica, procesamiento del lenguaje natural y muchas otras áreas. Una aplicación bastante renombrada es \emph{DeepID3} \cite{Sun2015}, la cual consiste en una doble red neuronal profunda (\acrshort{dnn}) implementada para el reconocimiento facial. Otra aplicación es la de \emph{DeepBind} \cite{Park2015}, la cual propone una red neuronal profunda con convolución para predecir la afinidad de enlace entre una proteína y secuencias de \emph{ADN} o \emph{RNA}. Por último está \emph{DMN} (Red de Memoria Dinámica) \cite{Kumar2016}, que presenta una arquitectura de redes neuronales profundas entrenadas para recibir preguntas y devolver respuestas.
+%
+En particular, en el área de física de partículas, el enfoque \acrshort{dl} ha permitido obtener mayores niveles de desempeño en tareas de clasificación \cite{Guest2018}, como en la búsqueda de partículas exóticas\footnote{Partículas que se producen con muy baja frecuencia.} como el bosón de Higgs \cite{Baldi2014}, lo cual se traduce en la clasificación de eventos de física conocida y eventos de nueva física \cite{Bhimji2018}. Recientemente los físicos han enfocado su atención en implementar soluciones utilizando \acrshort{dl} para mejorar la sensibilidad del análisis, así como también para afrontar el incremento en la resolución de los datos generados por los detectores.
+%
+
+La literatura demuestra que los diversos problemas del \acrshort{lhc} han sido resueltos principalmente con técnicas de \acrshort{ml}, específicamente con redes neuronales artificiales (\acrshort{ann}) y boosted decision trees (\acrshort{bdt}) \cite{Radovic2018}, y más recientemente se ha innovado con el enfoque de \acrshort{dl}.
+
+%*******************************%
+%La mayoría de los ejemplos presentados anteriormente \red{requieren del conocimiento de un experto} 
+% \sout{se relacionan con el uso de conocimiento de campo específico}%\footnote{Se refiere al estudio de un área específica o dominio de expertiz.} 
+%\red{La extracción de características es una etapa fundamental ---y a la vez compleja--- en los algoritmos de machine learning, ya que las características definen a los datos y  deben lograr representar la complejidad del problema. }
+%para la extracción de características de los datos y el diseño de las arquictecturas de las \acrshort{ann}s, con lo cual se pueden interpretar los datos usando un número determinado de características. 
+%
+%El problema es que en algunos casos, 
+%\sout{se puede perder información al extraer} 
+%\red{las} características \red{que definen los datos} que no capturan completamente la complejidad del problema. 
+
+%
+%En física de partículas se está realizando un gran esfuerzo para usar espacios de características de gran dimensión con los cuales entrenar algoritmos de \acrshort{ml} de última generación, como \acrshort{dnn}, \sout{cuya \textit{profundidad} de capas, lo cual será visto en las siguientes subsecciones,} es lo que permite extraer un gran número de características y, por ende, modelar transformaciones mucho más complicadas que las que son soportadas por las \acrshort{ann} \cite{Bengio2012}. 
+%*******************************%
+
+%\red{También elimino este párrafo, ya que ya se habló al comienzo de la sección de ANN, BDT y DL).}
+%Debido a esto, la superioridad de cada método ha sido ampliamente debatida \cite{Derkach2018} \cite{Rogozhnikov2016}. Una sub-rama del \acrshort{ml} que ha tomado bastante fuerza en los últimos años, es Deep Learning (\acrshort{dl}), con métodos como Redes Neuronales Profundas \acrshort{dnn} \cite{Guest2018}. Sin duda, el excelente desempeño de las técnicas nombradas anteriormente, introduce el cuestionamiento: ¿Cuál es el mejor método para aplicar a este estudio? Para dar respuesta a esta pregunta es necesario internarse mayormente en el \acrshort{ml}. %
+
+\subsection{Machine Learning}
+%
+Día a día, se generan gigantezcos volúmenes de datos; un claro ejemplo es Youtube, cuya plataforma procesa más de una hora de video por segundo. Para efectuar un análisis estadístico a tal cantidad de información, se requiere de métodos que automáticamente aprendan de los datos, es decir, programas que mejoren su desempeño con la experiencia \cite{Mitchell}, sin utilizar instrucciones programadas específicamente, y puedan realizar predicciones \cite{Murphy}, generando información nueva.
+%
+\acrshort{ml}, en esencia, corresponde a métodos de estadística aplicada, enfocados al uso de computación para estimar funciones matemáticas complejas, las cuales son posteriormente usadas para la extracción de información desde grandes cantidades de datos.
+
+\subsubsection{Tipos de Aprendizaje}
+
+Las técnicas de \acrshort{ml} son divididas en los siguientes tres principales tipos de aprendizaje:
+%
+
+\textbf{Aprendizaje supervisado:} 
+%
+
+El algoritmo debe ser capaz de inferir una función con la que sea capaz de predecir valores de salida para datos de entrada desconocidos \cite{Muller}. Esta función es estimada durante la fase de aprendizaje, efectuada durante el \textbf{entrenamiento} o \emph{training}, en el que el usuario provee al algoritmo un conjunto de datos con salida conocida, llamados \textbf{datos de entrenamiento}, que pueden representarse por la tupla $(x_i, y_i)$. Específicamente, $x_i$ es un dato de entrada y se expresa como un vector cuyas componentes son las características o atributos del dato. Por ejemplo, altura ($h$) y peso ($p$), caso en el que el vector $x_i$ se escribe como $<h_i,p_i>$, refiriéndose a la altura y peso del dato $i$. $y_i$ es la salida o etiqueta conocida de $x_i$. El presente trabajo se enfocará en el uso de algoritmos supervisados.
+%
+
+Los algoritmos supervisados se utilizan principalmente para resolver problemas de \textit{clasificación} y \textit{regresión} \cite{Murphy}. En el primero, el objetivo es predecir una categoría, por lo que la salida $y_i$ corresponde a un valor discreto. Mientras que en problemas de \textit{regresión} se busca predecir valores reales para la salida.
+%
+
+\textbf{Aprendizaje no supervisado:} 
+%
+
+El algoritmo recibe entradas no etiquetadas, es decir, el algoritmo debe aprender sin un \textit{educador} o supervisor. Son utilizados en tareas donde no se requiere de datos de ejemplo. Por ejemplo, en agrupación de datos (\emph{clustering}), identificación de patrones, algoritmos de visualización, reducción de dimensionalidad o detección de anomalías \cite{Bishop}.  
+%
+
+\textbf{Aprendizaje reforzado:} 
+%
+
+Es útil cuando se desea enseñar a un modelo a seguir cierto comportamiento a través de premios y castigos \cite{Bishop}. El sistema de aprendizaje, llamado \emph{agente}, puede "observar" su ambiente, seleccionar y efectuar acciones (de un conjunto predefinido), y obtener recomensas o penalizaciones. Así, el algoritmo debe aprender cuál es la mejor estrategia para obtener la mayor cantidad de recomensas posible \cite{Geron}. 
+
+\subsubsection{Clasificación}
+El objetivo del aprendizaje es generar una función $f$ que transforme las entradas $x_i$ en salidas $y_i \in C$, donde $C$ es el conjunto de clases. La función $f$ debe ser capaz de predecir la clase o etiqueta de un dato desconocido. Si el número de clases es dos, se habla de una \textbf{clasificación binaria} ---en la que usualmente se asume que las clases son $0$ y $1$--. Si hay más de dos clases, entonces se habla de \textbf{clasificación multiclase}. Si las clases no son mutuamente excluyentes, entonces es \textbf{clasificación multi-etiqueta} \cite{Murphy}.
+%
+Para el presente trabajo, al hablar de \textit{clasificación} se hace referencia a clasificación binaria.
+
+\subsubsection{Representación de los Datos}
+Para cualquier tipo de aprendizaje, es importante generar una \textit{representación de datos} que demuestre de forma clara cuáles son las \textbf{características} o propiedades que serán usadas para crear el modelo \cite{Muller}. Como se dijo anteriormente, los datos son representados por vectores y gráficamente como puntos en un espacio N-dimensional, donde N es la cantidad de características del conjunto de datos. Otra forma de representar los datos es usando una tabla \cite{Fernandes}, donde las columnas corresponden a las características y las filas a los datos, de esta forma las casillas de la tabla representan las mediciones de una característica para un dato determinado.
+%
+
+La Figura \ref{fig:scat} muestra una representación bi-dimensional de un conjunto arbitrario de datos de entrenamiento. La bi-dimensionalidad es simboliza que los datos se definen por dos características. Si un nuevo dato queda más cerca de la zona de los triángulos, el modelo lo etiquetará como clase \textit{triángulo} (clase 1), de lo contrario lo etiquetará como clase \textit{círculo} (clase 0). 
+%
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=12cm]{figures/image11.png}
+  \caption[Representación gráfica de un conjunto de datos de entrenamiento.]{Representación gráfica de un conjunto de datos de entrenamiento, con dos características (\emph{first feature} y \emph{second feature}), y dos categorías: \emph{class 0} y \emph{class 1}, simbolizadas por un círculo azul y un triángulo rojo respectivamente.
+  \source{\cite[Capítulo 2]{Muller}}}
+  \label{fig:scat}
+\end{figure}
+
+\subsubsection{\emph{Testing} y Validación}
+El desempeño de los algoritmos de \acrshort{ml} se mide en la fase de \textbf{prueba} o \emph{testing}, en la que se utiliza como entrada un conjunto de datos etiquetados (\textbf{datos de testing}) y nuevos para el modelo. La habilidad de un algoritmo para desempeñarse eficientemente sobre los datos de \emph{testing}, se llama \textbf{generalización} \cite{Goodfellow}. Durante el entrenamiento, el modelo intenta minimizar su \textbf{error de entrenamiento}, correspondiente a la diferencia entre el valor de clasificación y la etiqueta real de cada dato. Sin embargo, para ver qué tan bien funciona el modelo, se debe evaluar el error utilizando los datos del conjunto de prueba, a este se le conoce como \textbf{error de generalización} o error de \emph{testing} \cite{Geron}.     
+%
+Si el error de entrenamiento es bajo y el error de generalización es alto, significa que el modelo está sobreajustando (\textbf{\emph{overfitting}}) los datos. El \emph{overfitting} ocurre básicamente debido a que el entrenamiento fue muy \textit{minucioso}, es decir que fueron consideradas variaciones muy pequeñas en la entrada, las cuales tienen más probabilidad de ser \textit{ruido} que \textit{señal real} \cite{Murphy}. Otro desafío al generar modelos de \acrshort{ml}, es minimizar el \textbf{\emph{underfitting}}, que, contrario al \emph{overfitting}, corresponde a cuando el entrenamiento fue demasiado \textit{simple}, es decir, el modelo no logra capturar eficientemente los patrones en los datos \cite{Raschka}, lo cual conduce a un bajo error de entrenamiento. La Figura \ref{fig:ovund} demuestra que el nivel de complejidad se relaciona directamente con el factor de \emph{overfitting} y \emph{underfitting} en un modelo.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=11cm]{figures/image18.png}
+  \caption[Representación de modelos con \emph{overfitting} y \emph{underfitting}.]{Representación de modelos con \emph{overfitting} y \emph{underfitting} en datos de entrenamiento. La sencillez del modelo con \emph{underfitting} produce grandes diferencias entre los valores predichos y los reales (\textit{alto sesgo}). Mientras que la complejidad del modelo con \emph{overfitting} genera valores predichos con mucha varianza.
+  \source{\cite{Raschka}}}
+  \label{fig:ovund}
+\end{figure}
+
+En resumen, el rendimiento de un algoritmo de \acrshort{ml} depende de dos factores:
+\begin{itemize}
+    \item Minimización del error de entrenamiento
+    \item Minimización de la brecha entre el error de entrenamiento y el error de \emph{testing}.
+\end{itemize}
+
+Hay varias formas de prevenir el \emph{overfitting}, algunas de ellas son regularización, \emph{cross validation}, restricciones de norma máxima, \emph{dropout} (utilizada en \acrshort{ann}), entre otros \cite{Buduma}.
+
+\subsubsection{Clasificadores}
+
+\blue{To do.}
+
+\subsection{Boosted Decision Trees}
+
+\subsubsection{Árboles de Clasificación}
+
+Los árboles de decisión son algoritmos de \acrshort{ml} utilizados para tareas de clasificación y regresión, capaces de procesar conjuntos de datos complejos \cite{Geron}.
+%
+Como su nombre lo indica, emplean un modelo de decisiones en forma de árbol, y una característica principal es que divide un proceso complejo de toma de decisiones en un conjunto de decisiones más simples \cite{Safavian}.
+%
+La Figura \ref{fig:tree1} muestra un ejemplo de un árbol de decisión. 
+%
+Cada uno de los \textit{rectángulos} corresponde a un \textbf{nodo} y representa la verificación de cierta característica de los datos, por ejemplo, en el caso de que un dato se refiere a un animal, una posible verificación sería \textit{"¿Puede volar?"}. Estas verificaciones son llamadas \textit{nodos test} \cite{Muller}. 
+%
+Las ramas que conectan los nodos corresponden a los posibles valores de la verificación, por ejemplo "\textit{Sí/No}" \cite{Mitchell}. Generalmente las verificaciones utilizan operaciones de tipo $=$ y $\neq$ para el caso en el que las entradas categóricas sean discretas, y $<$, $\ge$, $>$ o $\le$ para entradas de valor continuo. Los valores de la verificación son representados por números, por ejemplo $1$ (``Sí'') y $0$ (``No''), para divisiones binarias, aunque también puede haber separaciones de tres niveles o más.
+%
+
+El recorrido de un árbol de decisión comienza por su raíz (o \emph{root}), desde donde el conjunto de datos será dividido en dos (o más) sub-conjuntos, en base a una verificación (o pregunta) con respecto a una característica.
+%
+Este proceso se vuelve a repetir con los sub-conjuntos como entradas de los nodos que siguen hasta que se hayan cubierto todas características de los datos y no puedan realizarse más verificaciones. 
+%
+Los sub-conjuntos resultantes son llamados \textbf{hojas}. 
+%
+
+En la Figura \ref{fig:tree1} los datos (probablemente correspondientes a animales) tienen las siguientes características: "[Sí/No tiene plumas, Sí/No puede volar, Sí/No tiene aletas]", junto con la etiqueta (especie) correspondiente: ``Halcón'', ``Pingüino'', ``Delfín'' y ``Oso''.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=12cm]{figures/image12.jpg}
+  \caption[Esquema de árbol de decisión para clasificar animales.]{Esquema de árbol de decisión para clasificar a un animal entre las especies; halcón, pingüino, delfín u oso, aplicando las verificaciones; "¿tiene alas?", seguido de "¿puede volar?" ó "¿tiene aletas?".
+  \source{Elaboración propia, basada en ejemplo de \cite[Capítulo 2]{Muller}.}}
+  \label{fig:tree1}
+\end{figure}
+
+Para hacer una predicción con un dato nuevo, se debe atravesar el árbol desde la raíz hasta llegar a una de las hojas, la cual corresponde a una etiqueta o valor de predicción. Una predicción para el árbol de la Figura \ref{fig:tree1}, se puede ejemplificar con la Figura \ref{fig:tree2}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=13cm]{figures/image13.jpg}
+  \caption[Esquema de árbol de decisión para clasificar un nuevo dato (de tipo \textit{animal}).]{Esquema de árbol de decisión para clasificar un nuevo dato cuyas características tienen los valores: ["Sí, tiene plumas", "No puede volar", "Sí, tiene aletas"]. El camino que sigue el dato dentro del árbol está marcado con las flechas rojas, terminando en la clase "Pingüino", que sería la etiqueta final del dato ingresado.
+  \source{Elaboración propia, basada en ejemplo de \cite[Capítulo 2]{Muller}}.}
+  \label{fig:tree2}
+\end{figure}
+
+\subsubsection{Entrenamiento}
+Durante el entrenamiento, el algoritmo será capaz de encontrar la secuencia adecuada de verificaciones o preguntas que proporcionen la respuesta correcta en la menor cantidad de pasos \cite{Muller}. Si un sub-conjunto final del árbol, es decir una hoja, posee datos que tengan la misma etiqueta, entonces se dice que esa hoja es \textit{pura}, y el que todas las hojas sean \textit{puras}, indica que el árbol tiene una presición del 100$\%$.
+
+Con el objetivo de encontrar esta secuencia ideal de verificaciones para dividir los datos, se usan heurísticas que eligen las mejores características y valores de estas, como base para sugerir verificaciones o particiones. Sumado a esto, la calidad de una verificación propuesta, se mide respondiendo a las cuestionantes: \textit{¿El árbol tiene una profundidad adecuada?} \textit{¿La distribución entre los subconjuntos generados en el nodo, es lo suficientemente homogénea?} \textit{¿El tamaño de los subconjuntos es lo suficientemente grande?} \cite[Capítulo 16]{Murphy}. Estas preguntas pueden ser respondidas en base al valor de diferentes medidas de error.
+%
+\subsubsection{Costo de Clasificación}
+Para evaluar la calidad de las particiones propuestas se pueden medir los siguientes errores \cite{Murphy}:
+
+\textbf{Taza de Clasificación Errónea:} Es el promedio de datos mal clasificados en un nodo. Siendo $D$ el conjunto de datos del nodo, $y_i$ es la clasificación real del dato $i$, $\hat{y}$ es la predicción de la clase del dato $i$, y $\mathbb{I}$ es la función \textit{indicatriz} que retorna $1$ si se cumple que la clasificación y la predicción de la clase del dato $i$ coinciden.
+\begin{align}
+ \frac{1}{|D|} \sum_{i \in D} \mathbb{I}(y_i \neq \hat{y})
+\end{align} 
+
+\textbf{Entropía:} Permite calcular la homogeneidad de las predicciones en un nodo. Si hay homogeneidad total, el valor de la entropía es $0$, de lo contrario es $1$. Siendo $\hat{\pi}$ es una variable aleatoria cuyos valores son las clases, $C$ es el conjunto de clases, $\hat{\pi}_c$ es la probabilidad de que una predicción coincida con la clase $c$, dada la verificación del nodo.
+\begin{align}
+ \mathbb{H}(\hat{\pi}) = -\sum_{c \in C} \hat{\pi}_c \log(\hat{\pi}_c)
+\end{align} 
+
+\textbf{Índice Gini:} Es la tasa de error esperado, donde $(1-\hat{\pi}_c)$ es la probabilidad de que una predicción para la clase $c$ resulte errónea.
+\begin{align}
+ \sum_{c \in C} \hat{\pi}_c (1-\hat{\pi}_c)
+\end{align} 
+
+La secuencia y posición de las verificaciones o \emph{nodos test} son esenciales para determinar el desempeño del árbol de decisión, es por ello que se pueden obtener mejores niveles de precisión si se utilizan múltiples árboles de decisión \cite{Quinlan1996}, con diferentes estructuras que otorguen mayor flexibilidad a la clasificación. 
+%
+Por otro lado, pese a que los árboles de decisión entregan buenos resultados, también son inestables, ya que un pequeño cambio en los datos de entrenamiento puede desencadenar muchos cambios en el árbol \cite{Roe2005}. 
+%
+Estas son dos de las situaciones que los algoritmos de \textit{boosting} intentan mejorar. 
+%
+\subsubsection{\emph{Boosting}}
+
+En los algoritmos de \emph{boosting}, se seleccionan, de forma aleatoria y con repetición, subconjuntos de datos a partir del conjunto de entrenamiento. Los subconjuntos son ordenados de forma secuencial y cada uno se ajusta a un árbol de decisión diferente \cite{James}. Los datos de entrenamiento que fueron mal clasificados durante la fase de \textit{testing} o prueba de un árbol, serán considerados en el siguiente con pesos más grandes. Estos árboles son conocidos como árboles \emph{boosted} o \emph{boosted trees}. 
+%
+
+Los algoritmos de \emph{boosting} tienen 3 parámetros de ajuste \cite{James}:
+\begin{itemize}
+    \item \textbf{Número de árboles (B):} Si B es muy grande, se puede producir \emph{overfitting}.
+    \item \textbf{Parámetro de encogimiento (\lambda):} Controla la tasa de aprendizaje del algoritmo. Normalmente se usan valores de $0.01$ o $0.001$. Un valor pequeño de \lambda puede requerir un valor grande de B.
+    \item \textbf{Número de divisiones en cada árbol ($d$):} Controla la complejidad del grupo de árboles. A menudo se usa un valor de $d=1$ implica que el árbol tiene sólo una ramificación, ya que un árbol con $d$ divisiones tiene $d$ variables.
+\end{itemize}
+%
+Según lo anterior, los \emph{Boosted Decision Trees} (\acrshort{bdt}) son conjuntos de árboles de decisión que usan técnicas de \emph{boosting}. 
+%
+Un \acrshort{bdt} implementado para clasificación binaria utiliza un sistema de puntaje para predecir la etiqueta de datos nuevos. 
+%
+Este consiste en que cuando un dato que es procesado por un árbol de tipo \emph{boosted}, cae en una \textit{hoja} de la \textit{primera clase}, obtiene un puntaje de $1$, pero al caer en hojas de la \textit{segunda clase}, obtiene un puntaje de $-1$. Al pasar por todos los árboles \emph{boosted}, el puntaje definitivo será la suma de todos los puntajes obtenidos. Si este es un valor muy grande, el dato será etiquetado como \textit{primera clase}, y si el valor es muy pequeño, será etiquetado como \textit{segunda clase}. Esto se determina con la ayuda de un valor de \textit{umbral} o \emph{threshold} de referencia, previamente definido. 
+%
+%
+\subsection{Redes Neuronales Artificiales y Aprendizaje Profundo}
+%
+Las redes neuronales artificiales (o \acrshort{ann}s, del inglés artificial neural networks) son modelos computacionales inspirados en las redes de neuronas biológicas del sistema nervioso central \cite{Graupe}. Están compuestas de un cojunto de unidades o nodos denominados \textit{neurona artificial}, la cual modela de forma muy simple la neurona del cerebro biológico. 
+%
+%\sout{Además, permiten usar operaciones computacionales simples, (sumas, multiplicaciones y elementos lógicos fundamentales) para resolver problemas complejos de tipo estocástico o no lineales.}
+%
+%
+%
+%An ANN is based on a collection of connected units or nodes called artificial neurons, which loosely model the neurons in a biological brain. Each connection, like the synapses in a biological brain, can transmit a signal from one artificial neuron to another. An artificial neuron that receives a signal can process it and then signal additional artificial neurons connected to it.
+%
+%\sout{La unidad fundamental de} 
+%\red{La neurona del} cerebro 
+%\sout{es la \textit{neurona}, la cual} 
+%tiene en promedio seis mil conexiones con otras neuronas y es el medio a través del cual los seres humanos aprenden de su entorno. 
+%
+%Esta unidad es utilizada como base para construir modelos de redes neuronales \cite{Buduma} que pueden ser representados en computador.
+%
+%
+\subsubsection{La Neurona}
+
+Como se muestra en la Figura \ref{fig:neur}, la neurona artificial toma el conjunto de \textbf{entradas} $x_0$, $x_1$,..., $x_n$, cada una multiplicada por un \textbf{peso} específico del conjunto $w_0$, $w_1$,..., $w_n$. Los conjuntos de entradas y pesos se expresan como los vectores \textbf{$x$} y \textbf{$w$} respectivamente. El término $x_i w_i$ se conoce como \textit{entrada ponderada}, las cuales son sumadas para formar el \textbf{logit} (o suma ponderada) $z = \sum_{i=0}^n {x_i w_i} = $ \textbf{$x w$}. En muchos casos también se considera un \textit{sesgo} ($b$), donde la fórmula del \emph{logit} sería $z = b + \sum_{i=0}^n {x_i w_i}$. Para el caso específico de la neurona en la Figura \ref{fig:neur}, el logit es $z = x_1 w_1 + x_2 w_2 + x_3 w_3$. Luego, la neurona realiza un cálculo utilizando la función $f$, llamada \textbf{función de activación}, sobre el \emph{logit} para producir la \textbf{salida} $y = f(z)$ \cite{Bishop}. Este proceso se repite pasando la salida $y$ como entrada a otra(s) neurona(s).
+
+Las neuronas artificiales se pueden clasificar según su función de activación \cite{Buduma}:
+\begin{itemize}
+    \item[$\bullet$] \textit{Neuronas Lineales}: Tienen funciones de activación lineales, en la forma $f(z) = az + b$.  
+    \item[$\bullet$] \textit{Neuronas Sigmoide}: Usan la función de activación $f(z)=\displaystyle\frac{1}{1+e^{-z}}$. Esto significa que cuando el logit es muy pequeño, la salida de una neurona es cercana a cero. Y cuando el logit es muy grande, la salida será cercana a uno. Su gráfico se puede observar en la Figura \ref{fig:sigm}.
+    \item[$\bullet$] \textit{Neuronas Tangente Hiperbólico}: Tienen una forma parecida a las neurones sigmoides. Su función de activación es $f(z)=tanh(z)=\displaystyle\frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}$. La salida se mueve en el rango de cero a uno, y la función $f$ va desde $-1$ a $1$, como se observa en la Figura \ref{fig:tanh}.
+    \item[$\bullet$] \textit{Neurona \acrshort{relu}}: Usa la función $f(z)=max(0,z)$, lo que quiere decir que deja pasar a todos los valores positivos sin cambiarlos, pero transforma los valores negativos a cero. Su gráfico se puede observar en la Figura \ref{fig:relu}.  
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{figures/image15.png}
+\caption{Neurona Sigmoide}\label{fig:sigm}
+\end{subfigure}
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{figures/image16.png}
+\caption{Neurona Tanh}\label{fig:tanh}
+\end{subfigure}
+\begin{subfigure}[b]{.45\linewidth}
+\includegraphics[width=\linewidth]{figures/image17.png}
+\caption{Neurona ReLU}\label{fig:relu}
+\end{subfigure}
+\caption[Neuronas de función no lineal.]{Neuronas de función no lineal.
+\source{\cite{Buduma}}}
+\label{fig:main}
+\end{figure}
+
+\input{neuron.tex}
+
+\subsubsection{Estructura de una Red}
+
+En el cerebro, las neuronas están organizadas en capas, y la información fluye de una capa a otra, hasta que las entradas sensoriales son transformadas en entendimiento conceptual. 
+%
+En este contexto, las redes neuronales artificiales son construidas conectando neuronas y formando capas de estas. 
+%
+Se tienen tres tipos de capas \cite{Buduma}:
+
+\textbf{Capa de entrada:} Corresponde al grupo de neuronas que introduce los datos a la red. Los nodos que conforman esta capa son llamados \textit{unidades de entrada}. Estas no procesan información, sino que sólo la traspasan a otras unidades.
+
+\textbf{Capa oculta:} Sus nodos son llamados \textit{unidades ocultas}. Se ubican entre la capa de entrada y la capa de salida, y no son directamente observables.
+
+\textbf{Capa de salida:} Sus nodos son llamados \textit{unidades de salida}. Codifican posibles valores para la instancia. Por ejemplo, cada unidad de salida puede representar una de las categorías.
+% Tipos de funciones (softmax, etc).
+
+Desde el punto de vista del esquema general de conexiones entre las  unidades, una red puede ser \emph{feedforward} o \textit{recurrente}, y la conexión entre dos neuronas o unidades, puede ser \textit{simétrica} o \textit{asimétrica} \cite{Fu}.
+\begin{itemize}
+    \item \textit{Red Feedforward:} Todas las conexiones tienen una misma dirección, desde la capa de entrada hacia la capa de salida.
+    \item \textit{Red Recurrente:} Hay conexiones que forman ciclos.
+    \item \textit{Conexiones Simétricas:} La conexión entre dos neuronas es bidireccional y el peso asociado a esa conexión es el mismo para ambas unidades.
+    \item \textit{Conexiones Asimétricas:} La conexión entre dos neuronas es unidireccional.
+\end{itemize}
+
+\subsubsection{Representación}
+
+Una neurona individual realiza operaciones vectoriales para procesar sus pesos y entradas entre dos nodos. En una red neuronal, estas operaciones son representadas usando matrices y vectores. Considerando $N_k$ como el número de neuronas en la capa $k$ y $P$ como el número total de capas, la simbología y su representación se describen a continuación:
+
+\textbf{Pesos:}
+\begin{itemize}
+    \item $W^{(k)}$: Matriz de pesos para las conexiones entre la capa $(k-1)$ y $k$ de la red.
+    \item $w_{j}^{(k)}$: Vectores columna de $W^{(k)}$. Representan los pesos que llegan a la neurona $j$ de la capa $k$. 
+    \item $w_{i,j}^{(k)}$: Componentes escalares del vector $w_{j}^{(k)T}$. Representan los pesos de la conexión entre la neurona $i$ de la capa $(k-1)$ y la neurona $j$ de la capa $k$.
+\end{itemize} 
+%
+Es importante acotar que la capa de entrada no tiene pesos.
+%
+\begin{align*}
+    W^{(k)} = \begin{bmatrix} 
+                w_{1}^{(k)T} \\ 
+                w_{2}^{(k)T} \\ 
+                \vdots \\ 
+                w_{N_k}^{(k)T} 
+              \end{bmatrix} 
+            = \begin{bmatrix} 
+                w_{1,1}^{(k)} & w_{2,1}^{(k)} & \dots & w_{N_k,1}^{(k)} \\
+                w_{1,2}^{(k)} & w_{2,2}^{(k)} & \dots & w_{N_k,2}^{(k)} \\
+                \vdots & & \ddots & \vdots \\
+                w_{1,N_k}^{(k)} & w_{2,N_k}^{(k)} & \dots & w_{N_k,N_k}^{(k)}
+              \end{bmatrix}
+\end{align*}
+
+\textbf{Entradas:}
+\begin{itemize}
+    \item $A^{(k)}$: Vector columna equivalente las entradas de la capa $k$.
+    \item $a_{i}^{(k)}$: Componentes escalares de $A^{(k)}$. Corresponde al dato de entrada $i$ de la capa $k$.
+\end{itemize}
+%
+Se debe considerar que los datos de entrada de la capa de entrada, son los datos originales. Por otro lado, los datos de entrada $a_{i}^{(k)}$ de una capa oculta o capa de salida ($k$), son los datos de salida de la capa anterior, es decir $a_{i}^{(k)} = f(z_{i}^{(k)})$.
+%
+\begin{align*}
+    A^{(k)} = \begin{bmatrix} 
+                a_{1}^{(k)} \\ 
+                a_{2}^{(k)} \\ 
+                \vdots \\ 
+                a_{N_k}^{(k)} 
+              \end{bmatrix}
+            = f(Z^{(k)})
+            = \begin{bmatrix} 
+                f(z_{1}^{(k)}) \\ 
+                f(z_{2}^{(k)}) \\ 
+                \vdots \\ 
+                f(z_{N_k}^{(k)}) 
+              \end{bmatrix}
+            = \begin{bmatrix} 
+                f(w_{1}^{(k)T} A^{k-1} + b_1^{(k)}) \\ 
+                f(w_{2}^{(k)T} A^{k-1} + b_2^{(k)}) \\ 
+                \vdots \\ 
+                f(w_{N_k}^{(k)T} A^{k-1} + b_{N_k}^{(k)}) 
+              \end{bmatrix}
+\end{align*}
+%
+
+\textbf{Suma ponderada:}
+\begin{itemize}
+    \item $Z^{(k)}$: Vector de las sumas ponderadas (\emph{logits}) en la capa $k$.
+    \item $z_i^{(k)}$: Componentes escalares de $Z^{(k)}$. Representa el \emph{logit} de la neurona $i$ de la capa $k$ y equivale a la operación vectorial $w_j^{(k)T} A^{k-1} + b_i^{(k)}$
+\end{itemize}
+%
+\begin{align*}
+    Z^{(k)} = \begin{bmatrix} 
+                z_1^{(k)} \\ 
+                z_2^{(k)} \\ 
+                \vdots \\ 
+                z_{N_k}^{(k)} 
+              \end{bmatrix}
+            = \begin{bmatrix} 
+                w_{1}^{(k)T} A^{k-1} + b_1^{(k)} \\ 
+                w_{2}^{(k)T} A^{k-1} + b_2^{(k)} \\ 
+                \vdots \\ 
+                w_{N_k}^{(k)T} A^{k-1} + b_{N_k}^{(k)} 
+              \end{bmatrix}
+\end{align*}
+%
+
+\textbf{Sesgo:}
+\begin{itemize}
+    \item $b^{(k)}$: Vector de los sesgos en la capa $k$.
+    \item $b_i^{(k)}$: Componentes escalares de $b^{(k)}$. Corresponde al sesgo de la neurona $i$ en la capa $k$.
+\end{itemize}
+%
+\begin{align*}
+    b^{(k)} = \begin{bmatrix} 
+                b_1^{(k)} \\ 
+                b_2^{(k)} \\ 
+                \vdots \\ 
+                b_{N_k}^{(k)} 
+              \end{bmatrix}
+\end{align*}
+%
+
+En la red neuronal de la Figura \ref{fig:ann1}, las matrices de pesos y los vectores de entradas se definen de la siguiente forma.
+%
+\input{ann1.tex}
+%
+
+\begin{align*}
+    W^{(1)} = \begin{bmatrix} 
+                w_{1,1}^{(1)} & w_{2,1}^{(1)} & w_{3,1}^{(1)} \\
+                w_{1,2}^{(1)} & w_{2,2}^{(1)} & w_{3,2}^{(1)} 
+              \end{bmatrix}
+    W^{(2)} = \begin{bmatrix} 
+                w_{1,1}^{(2)} & w_{2,1}^{(2)} \\
+                w_{1,2}^{(2)} & w_{2,2}^{(2)}
+              \end{bmatrix}
+\end{align*}
+\begin{align*}
+    A^{(0)} = \begin{bmatrix} 
+                x_1 \\
+                x_2 \\
+                x_3
+              \end{bmatrix}
+    A^{(1)} = \begin{bmatrix} 
+                f(z_1^{(1)}) \\
+                f(z_2^{(1)})
+              \end{bmatrix}
+    A^{(2)} = \begin{bmatrix} 
+                f(z_1^{(2)}) \\
+                f(z_2^{(2)})
+              \end{bmatrix}          
+\end{align*}
+\begin{align*}
+    Z^{(1)} = \begin{bmatrix} 
+                z_1^{(1)} \\
+                z_2^{(1)}
+              \end{bmatrix}
+            = \begin{bmatrix} 
+                w_{1,1}^{(1)} x_1 + w_{2,1}^{(1)} x_2 + w_{3,1}^{(1)} x_3 \\
+                w_{1,2}^{(1)} x_1 + w_{2,2}^{(1)} x_2 + w_{3,2}^{(1)} x_3 
+              \end{bmatrix}
+    Z^{(2)} = \begin{bmatrix} 
+                z_1^{(2)} \\
+                z_2^{(2)}
+              \end{bmatrix}
+            = \begin{bmatrix} 
+                w_{1,1}^{(2)} f(z_1^{(1)}) + w_{2,1}^{(2)} f(z_2^{(1)}) \\
+                w_{1,2}^{(2)} f(z_1^{(1)}) + w_{2,2}^{(2)} f(z_2^{(1)})
+              \end{bmatrix} 
+\end{align*}
+
+\subsubsection{\emph{Deep Learning}}
+
+Se cree que en el cerebro, cada capa de neuronas aprende una característica diferente de los datos que procesa. Esta es la base de inspiración del, cada vez más popular, enfoque de \emph{Deep Learning} (\acrshort{dl}). Las \textbf{redes neuronales profundas} (\emph{Deep Neural Networks}, \acrshort{dnn}) imitan los patrones de comunicación y el procesamiento de información en sistemas de neuronas biológicas, que sacan mucho provecho de la \textit{profundidad} de sus redes \cite{Aggarwal}.
+%
+\acrshort{dl} provee un \emph{framework} moderno para los métodos de aprendizaje supervisado. Al incrementar la cantidad de neuronas y de capas ocultas, \acrshort{dl} puede representar funciones de gran complejidad. Las \acrshort{dnn} son típicamente de tipo \emph{feedforward}, como el ejemplo en La Figura \ref{fig:dnn}.
+
+\input{dnn.tex}
+
+\subsubsection{Hiper-parámetros?}
+
+\blue{To do.}
+% epochs, bunch, etc.
+
+\subsubsection{Entrenamiento}
+
+Durante el entrenamiento, la red neuronal recibe un gran conjunto de ejemplos de entrenamiento, típicamente descritos por vectores de características asociados a salidas deseadas, y modifica los valores de los pesos de forma iterativa, minimizando el error obtenido de la diferencia entre las salidas obtenidas y las salidas deseadas. El objetivo de esta fase es hallar una combinación de \textit{pesos} que minimicen este error. Después de que la red haya procesado bastantes ejemplos, se espera que el algoritmo sea lo suficientemente efectivo como para resolver la tarea para la que fue entrenado \cite{Buduma} utilizando datos no vistos previamente.
+%
+
+Dos de los errores más utilizados para modificar los pesos, son
+\begin{itemize}
+    \item \textbf{Suma de los errores cuadrados:} Siendo $T_{j,p}$ la salida obtenida y $O_{j,p}$ la salida deseada, de la unidad $j$ en la instancia $p$.
+    \begin{align*}
+    \sum_p \sum_j (T_{j,p} - O_{j,p})^2
+    \end{align*}
+    \item \textbf{\emph{Cross-entropy:}}  Siendo $P_{j,p}$ y $Q_{j,p}$ la probabilidad deseada y la probabilidad real del nodo de salida $j$ en la instancia $p$.
+    \begin{align*}
+    - \sum_p \sum_j P_{j,p}\log_2(Q_{j,p})+(1-P_{j,p})\log_2(1-Q_{j,p})
+    \end{align*}
+\end{itemize}
+%
+Al comienzo del entrenamiento, el algoritmo debe contar con una matriz de pesos de referencia. Dos de los métodos más utilizados para inicializar los valores de los pesos, son: ajustarlos al esquema de pesos determinado para el modelo de la red neuronal a utilizar, o inicializarlos de forma aleatoria.
+%
+
+\textbf{Gradiente descendente:}
+
+Es un algoritmo utilizado para encontrar la combinación de pesos que minimizan la función de error. El gradiente descendente actúa sobre un espacio (N+1)-dimensional, donde N corresponde a la cantidad de entradas (y pesos) de una unidad, y la dimensión sobrante, que podría interpretarse como la altura de la superficie, representa el error obtenido con las diferentes configuraciones de los pesos. La idea es encontrar el punto donde la altura (error) sea menor. Para ello el algoritmo recorre iterativamente la superficie, evaluando el gradiente en cada posición, con lo que obtiene la dirección de la mayor declinación y actualiza su posición actual en base a ello. Repitiendo estos pasos, eventualmente el algoritmo llegará al punto de error mínimo \cite{Buduma}.
+
+%
+\subsubsection{Algoritmos de Aprendizaje}
+
+Los algoritmos de aprendizaje son utilizados para determinar cómo adaptar los pesos de las conexiones maximizando el rendimiento del algoritmo. Además especifican cómo calcular el ajuste de los pesos en cada iteración \cite{Fu}.
+
+\textbf{\emph{Backpropagation}}
+
+\blue{To do.}
+% Tal vez poner pseudocódigo
+
+\subsubsection{Métricas de Error?}
+
+\blue{To do.}
+% Matriz de confusión (p. 181 Murphy), score, accuracy, etc.
+% Como evitar el overfitting (regularización)
+
+
+% Estructura Redes Neuronales:
+
+% Inspiración y origen
+% Redes neuronales Descripción (tipos, capas, etc)
+% Deep Learning Descripción
+% Unidad básica: Neurona
+% Neurona artificial
+% Funciones de activación
+% Algoritmos de aprendizaje (gradiente descendente y regresión lineal)
+% Clasificadores
+% Medición de desempeño (accuracy, error rate, etc)
