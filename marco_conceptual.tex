@@ -39,6 +39,21 @@ La literatura demuestra que los diversos problemas del \acrshort{lhc} han sido r
 %
 %El problema es que en algunos casos, 
 %\sout{se puede perder información al extraer} 
+Track changes is off
+Everyone
+You
+Raquel Pezoa
+Guests
+You: Dejarlo para más adelante, ya que no está muy bien redactado, y el tema de la extracción de características es más complejo
+Feb 15, 2019 12:18 PM • Edit
+Hit Enter to reply
+You: ¿Debo decir algo sobre la convolución?
+Feb 22, 2019 4:21 PM • Edit
+Hit Enter to reply
+Current file
+Overview
+33
+
 %\red{las} características \red{que definen los datos} que no capturan completamente la complejidad del problema. 
 
 %
@@ -82,7 +97,8 @@ Es útil cuando se desea enseñar a un modelo a seguir cierto comportamiento a t
 \subsubsection{Clasificación}
 El objetivo del aprendizaje es generar una función $f$ que transforme las entradas $x_i$ en salidas $y_i \in C$, donde $C$ es el conjunto de clases. La función $f$ debe ser capaz de predecir la clase o etiqueta de un dato desconocido. Si el número de clases es dos, se habla de una \textbf{clasificación binaria} ---en la que usualmente se asume que las clases son $0$ y $1$--. Si hay más de dos clases, entonces se habla de \textbf{clasificación multiclase}. Si las clases no son mutuamente excluyentes, entonces es \textbf{clasificación multi-etiqueta} \cite{Murphy}.
 %
-Para el presente trabajo, al hablar de \textit{clasificación} se hace referencia a clasificación binaria.
+Durante el presente trabajo, al hablar de \textit{clasificación} se hace referencia a clasificación binaria.
+%
 
 \subsubsection{Representación de los Datos}
 Para cualquier tipo de aprendizaje, es importante generar una \textit{representación de datos} que demuestre de forma clara cuáles son las \textbf{características} o propiedades que serán usadas para crear el modelo \cite{Muller}. Como se dijo anteriormente, los datos son representados por vectores y gráficamente como puntos en un espacio N-dimensional, donde N es la cantidad de características del conjunto de datos. Otra forma de representar los datos es usando una tabla \cite{Fernandes}, donde las columnas corresponden a las características y las filas a los datos, de esta forma las casillas de la tabla representan las mediciones de una característica para un dato determinado.
@@ -119,9 +135,15 @@ En resumen, el rendimiento de un algoritmo de \acrshort{ml} depende de dos facto
 
 Hay varias formas de prevenir el \emph{overfitting}, algunas de ellas son regularización, \emph{cross validation}, restricciones de norma máxima, \emph{dropout} (utilizada en \acrshort{ann}), entre otros \cite{Buduma}.
 
-\subsubsection{Clasificadores}
+\subsubsection{Optimización de Parámetros}
 
-\blue{To do.}
+Un modelo puede ser generado utilizando diferentes parámetros en el algoritmo de aprendizaje, estos parámetros son también conocidos como \textbf{hiperparámetros}, y son los encargados de regular el aprendizaje del modelo \cite{Geron}. Estos parámetros son fijados antes del entrenamiento y se mantienen constantes.
+%
+
+Es importante cuestionarse cuáles son los parámetros que generan el modelo que entregará los mejores resultados. Para ello, se realizan técnicas de \textit{optimización de parámetros} \cite{Raschka}, que ayudarán a encontrar los mejores valores para estos parámetros.
+%
+
+Cada algoritmo de \acrshort{ml} posee diferentes tipos de hiperparámetros, por lo que serán detallados en las secciones correspondientes.
 
 \subsection{Boosted Decision Trees}
 
@@ -170,6 +192,18 @@ Durante el entrenamiento, el algoritmo será capaz de encontrar la secuencia ade
 
 Con el objetivo de encontrar esta secuencia ideal de verificaciones para dividir los datos, se usan heurísticas que eligen las mejores características y valores de estas, como base para sugerir verificaciones o particiones. Sumado a esto, la calidad de una verificación propuesta, se mide respondiendo a las cuestionantes: \textit{¿El árbol tiene una profundidad adecuada?} \textit{¿La distribución entre los subconjuntos generados en el nodo, es lo suficientemente homogénea?} \textit{¿El tamaño de los subconjuntos es lo suficientemente grande?} \cite[Capítulo 16]{Murphy}. Estas preguntas pueden ser respondidas en base al valor de diferentes medidas de error.
 %
+
+\subsubsection{Hiperparámetros}
+
+\begin{itemize}
+    \item[$\bullet$] \textbf{Número de árboles} que se construirán.
+    \item[$\bullet$] \textbf{Máxima profundidad} permitida para cada árbol.
+    \item[$\bullet$] \textbf{Número de divisiones} en cada árbol.
+    \item[$\bullet$] \textbf{Tamaño mínimo de los nodos} define la cantidad mínima de datos que deben pasar (o llegar) a cada nodo del árbol. Implícitamente define la profundidad de los árboles; a mayor tamaño de los nodos, menor profundidad, y viceversa.
+    \item[$\bullet$] \textbf{Algoritmo de \emph{boosting}} con el que construir los árboles.
+    \item[$\bullet$] \textbf{Razón de aprendizaje} del algoritmo de \emph{boosting}.
+\end{itemize}
+
 \subsubsection{Costo de Clasificación}
 Para evaluar la calidad de las particiones propuestas se pueden medir los siguientes errores \cite{Murphy}:
 
@@ -441,11 +475,6 @@ Se cree que en el cerebro, cada capa de neuronas aprende una característica dif
 
 \input{dnn.tex}
 
-\subsubsection{Hiper-parámetros?}
-
-\blue{To do.}
-% epochs, bunch, etc.
-
 \subsubsection{Entrenamiento}
 
 Durante el entrenamiento, la red neuronal recibe un gran conjunto de ejemplos de entrenamiento, típicamente descritos por vectores de características asociados a salidas deseadas, y modifica los valores de los pesos de forma iterativa, minimizando el error obtenido de la diferencia entre las salidas obtenidas y las salidas deseadas. El objetivo de esta fase es hallar una combinación de \textit{pesos} que minimicen este error. Después de que la red haya procesado bastantes ejemplos, se espera que el algoritmo sea lo suficientemente efectivo como para resolver la tarea para la que fue entrenado \cite{Buduma} utilizando datos no vistos previamente.
@@ -465,6 +494,21 @@ Dos de los errores más utilizados para modificar los pesos, son
 %
 Al comienzo del entrenamiento, el algoritmo debe contar con una matriz de pesos de referencia. Dos de los métodos más utilizados para inicializar los valores de los pesos, son: ajustarlos al esquema de pesos determinado para el modelo de la red neuronal a utilizar, o inicializarlos de forma aleatoria.
 %
+
+\subsubsection{Hiperparámetros}
+
+\begin{itemize}
+    \item[$\bullet$] \textbf{Cantidad de \emph{epochs}}, correspondiente al número de veces que el \emph{dataset} de entrenamiento atraviesa la red. Valores altos indican que la red entrenará una mayor cantidad de veces. Cuando el \emph{dataset} es muy grande, este puede ser dividido en \emph{batches}.
+    \item[$\bullet$] \textbf{Cantidad de \emph{batches}} es el número de sub-grupos en los que se divide el conjunto de datos, y que pasan a través de la red neuronal.
+    \item[$\bullet$] \textbf{Tamaño del \emph{batch}} es el número de datos que conforman cada sub-grupo del \emph{dataset}.
+    \item[$\bullet$] \textbf{Iteración}, es la cantidad de \emph{batches} requeridos para completar un \emph{epoch}.
+    \item[$\bullet$] \textbf{Número de ciclos}, o cantidad de veces, que la red es entrenada.
+    \item[$\bullet$] \textbf{Cantidad de capas ocultas} en la red, sin contar la capa de entrada y la de salida.
+    \item[$\bullet$] \textbf{Cantidad de neuronas} en cierta capa.
+    \item[$\bullet$] \textbf{Función de activación} de las neuronas de cierta capa.
+    \item[$\bullet$] \textbf{Razón de aprendizaje} de la red neuronal.
+    \item[$\bullet$] \textbf{Razón de decaimiento} en la razón de aprendizaje de la red.
+\end{itemize}
 
 \textbf{Gradiente descendente:}
 
